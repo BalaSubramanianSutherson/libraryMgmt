@@ -1,0 +1,62 @@
+CREATE TABLE roles (
+    id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+	active BOOLEAN DEFAULT TRUE,
+    created_by VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(20) NOT NULL,
+    updated_at TIMESTAMP
+);
+
+CREATE TABLE users (
+ 	id VARCHAR(20) PRIMARY KEY, -- phone number
+    firstname VARCHAR(100) NOT NULL,
+    lastname VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NULL,
+    password TEXT NOT NULL,
+    role_id UUID REFERENCES roles(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    active BOOLEAN DEFAULT TRUE,
+    created_by VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(20) NOT NULL,
+    updated_at TIMESTAMP
+);
+
+CREATE TABLE book_categories (
+    id UUID PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+	active BOOLEAN DEFAULT TRUE,
+    created_by VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(20) NOT NULL,
+    updated_at TIMESTAMP
+);
+
+CREATE TABLE books (
+    id UUID PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+	published_date DATE NOT NULL,
+    category_id UUID REFERENCES book_categories(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+	is_available BOOLEAN DEFAULT TRUE,
+    active BOOLEAN DEFAULT TRUE,
+    created_by VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(20) NOT NULL,
+    updated_at TIMESTAMP
+);
+
+
+CREATE TABLE book_borrow (
+    id UUID PRIMARY KEY,
+    user_id VARCHAR(20) REFERENCES users(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    book_id UUID REFERENCES books(id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    check_out_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    check_in_at TIMESTAMP,
+    due_date DATE NOT NULL,
+    status VARCHAR(20) NOT NULL,
+    created_by VARCHAR(20) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_by VARCHAR(20)NOT NULL,
+    updated_at TIMESTAMP
+);

@@ -1,0 +1,46 @@
+# Library Management System
+
+A simple Spring Boot-based Library Management System that allows for managing books, users, borrowing/returning books, and more. This project also implements JWT-based authentication and Swagger UI for API documentation.
+
+## Prerequisites
+- Java 21
+- Maven
+- PostgreSQL
+- IDE (IntelliJ IDEA)
+- Postman (for testing APIs)
+
+## Features
+- User Registration and Authentication
+- Book Management (CRUD operations)
+- Book Borrowing and Returning
+- Book Categories
+
+
+## Project Structure
+```
+src
+├── main
+│   ├── java
+│   │   └── com
+│   │       └── example
+│   │           └── libraryMgmt
+│   │               ├── config
+│   │               ├── controllers
+│   │               ├── dto
+│   │               ├── exception
+│   │               ├── model
+│   │               ├── repositories
+│   │               ├── security
+│   │               ├── services
+│   │               └── LibraryMgmtApplication.java
+│   └── resources
+│       ├── application.properties
+│       └── static
+└── test
+    └── java
+        └── com
+            └── example
+                └── libraryMgmt
+                    ├── controllers
+                    ├── services
+                    └── LibraryMgmtApplicationTests.java
